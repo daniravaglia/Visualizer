@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head_buttons %}
+    <li class="nav-item">
+      <a class="nav-link" name="home" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="about"href="#">About</a>
+    </li>
+    {% endblock %}
+          
+    {% block container %}
+
+
+    <div id=back class=container>
+        <div id=ab></div>
+        <div class="category_container">
+            <div class="row" id="categories"></div>
+        </div>
+        <div id="output">
+
+        </div>
+    </div>
+    
+      <hr class="featurette-divider"></hr>
+    {% endblock %}
+
+    {% block scripts %}
+    <script>
+    $(document).ready(function(){
+    var page_name = "Mario";
+        getWikiPage(page_name);
+    });
+</script>
+    {% endblock %}

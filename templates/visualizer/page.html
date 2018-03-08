@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block head_buttons %}
+    <li class="nav-item">
+      <a class="nav-link" name="home" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="about"href="#">About</a>
+    </li>
+    {% endblock %}
+          
+    {% block container %}
+
+
+    <div id=back class=container>
+        
+        <div id=ab></div>
+        <div class="category_container">
+            <div class="row" id="categories"></div>
+        </div>
+        <div id="output">
+        </div>
+    </div>
+    
+      <hr class="featurette-divider"></hr>
+    {% endblock %}
+
+    {% block scripts %}
+    <script>
+    
+    $(document).ready(function(){
+        var page_name = "{{page}}";
+        var mode = "{{mode}}";
+        getWikiPage(page_name, mode);
+        
+        
+    });
+        
+    //cerco qualcosa
+        //mouse click
+      
+    $('form').on('click','#search',function(){
+		var s = $("input").val();
+        $("#categories").empty();
+        $("#output").empty();
+        $("div[id=ab]").empty();
+        $('#main').empty();
+        $('#main').append("<h1>Scegli una categoria</h1><p>Oppure usa la barra di ricerca per cercare qualcos'altro.</p>'");
+		req_wiki_search(s);     
+    });
+
+    //tastiera invio
+    $("input").keypress(function(event){
+        if (event.which == 13) 
+        {
+            event.preventDefault();
+            var s = $("input").val();
+            $("#categories").empty();
+            $("#output").empty();
+            $("div[id=ab]").empty();
+            $('#main').empty();
+            $("div[id='pagemenu\']").remove();
+            $('#main').append("<h1>Scegli una categoria</h1><p>Oppure usa la barra di ricerca per cercare qualcos'altro.</p>'");
+		    req_wiki_search(s);
+        }
+    });
+
+//scroll header
+
+var lastScrollTop = 0;
+
+    $(window).scroll(function () {
+
+        var st = $(this).scrollTop();
+        if (st < lastScrollTop)
+        {
+            $('#mario').fadeIn();
+        } 
+        else {
+            $('#mario').fadeOut();
+        }
+        lastScrollTop = st;
+  });
+            
+    </script>
+    
+    {% endblock %}

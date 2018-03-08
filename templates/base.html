@@ -1,0 +1,111 @@
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>Visualizer</title> 
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    {% block style %}
+    <link href= "{% static 'visualizer/style.css' %}" rel="stylesheet"> 
+    {% endblock %}
+   {% endblock %}
+  </head>
+  <body data-spy="scroll" data-target="#sidebar" data-offset="1">
+    {% block body %}
+    <header id=mario> 
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/home">R.A.V.E.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+         
+               <li class="nav-item">
+                    <a class="nav-link" name="home" href="/home">Home</a>
+                </li>
+                 
+                <li class="nav-item">
+                    <a class="nav-link" id="about"href="/about">About</a>
+                </li>
+            
+         
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.username }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+            <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+          </div>
+        </li>
+        </ul>
+        {% else %}
+            <li class="nav-item">
+                    <a class="nav-link" href="/signup">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="login-trigger" href="/login">Login</a>  
+                </li>
+                <style>
+                  .annotator-controls, .annotator-adder { display:none; }
+                   </style> 
+            <!-- se l'user non e` loggato -->
+        {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0" id='search2'>
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="search" type=button>Search</button>
+          </form> 
+        </div>
+      </nav>
+    </header>
+   
+      <!-- Category list
+      ================================================== -->
+      <div id=main class=jumbotron>
+        <h1>Scegli una categoria</h1>
+        <p>Oppure usa la barra di ricerca per cercare qualcos'altro.</p>
+      </div>
+      <div class="container marketing">
+    {% block container %}
+     
+    {% endblock %}
+      </div><!-- /.container -->
+
+      <!-- FOOTER -->
+      
+      <footer class="container">
+    {% block footer %}
+        <p class="float-right"><a href="#">Back to top</a></p>
+    {% endblock %}
+      </footer>
+      
+    </main>
+   <!-- FINE FOOTER -->
+
+    <!-- SCRIPT-->
+    <script type="text/javascript" src="{% static 'visualizer/javasc.js' %}"></script>
+    <!-- OLD <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {% block scripts %}
+ 
+    {% endblock %}
+
+    <!-- JS PER SCORRIMENTO IMMAGINI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.3/seedrandom.min.js"></script>   
+   {% endblock %}
+ <!-- Annotator -->
+   <script src="{% static 'annotator/annotator-full.min.js' %}"></script>   
+  </body>
+</html>
